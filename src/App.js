@@ -14,9 +14,7 @@ function App() {
   const getTasks = async() => {
     try {
       const response = await api.get('/tasks');
-      // console.log('getTasks response', response);
       if(response.status === 200) {
-        console.log('성공');
         setTodoList(response.data.data);
       } else {
         throw new Error('할 일을 조회할 수 없습니다.');
@@ -32,9 +30,7 @@ function App() {
         task: todoValue, 
         isComplete: false
       });
-      // console.log('addTasks response', response);
       if(response.status === 200){
-        console.log('성공');
         setTodoValue('');
         getTasks();
       } else {
@@ -48,7 +44,6 @@ function App() {
 
   const updateTaskComplete = async(id) => {
     const response = await api.put(`/tasks/${id}`);
-    // console.log('updateTaskComplete response', response);
     try {
       if(response.status === 200) {
         getTasks();
@@ -62,7 +57,6 @@ function App() {
 
   const deleteTask = async(id) => {
     const response = await api.delete(`/tasks/${id}`);
-    // console.log('deleteTask response', response);
     try {
       if(response.status === 200) {
         getTasks();
