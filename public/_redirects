@@ -1,1 +1,1 @@
-/api/* http://todolist-react-node.us-west-2.elasticbeanstalk.com/api/:splat 200
+/api/* http://todolist-react-node.ap-northeast-2.elasticbeanstalk.com/api/:splat 200
