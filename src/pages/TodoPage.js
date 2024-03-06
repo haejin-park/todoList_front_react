@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import api from "../utils/api";
 import TodoBoard from "../components/TodoBoard";
- 
 const TodoPage = () => {
-
+  
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState('');
-
   const getTasks = async() => {
     try {
       const response = await api.get('/tasks');
@@ -16,8 +14,8 @@ const TodoPage = () => {
       } else {
         throw new Error('할 일을 조회할 수 없습니다.');
       }
-    } catch (err) {
-      console.error('err', err);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -33,8 +31,8 @@ const TodoPage = () => {
       } else {
         throw new Error('할 일을 추가할 수 없습니다.');
       }
-    } catch (err) {
-      console.error('err', err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -47,8 +45,8 @@ const TodoPage = () => {
       } else {
         throw new Error('할 일 완성여부를 수정할 수 없습니다.');
       }
-    } catch(err) {
-      console.error(err);
+    } catch(error) {
+      console.error(error);
     }
   }
 
@@ -60,8 +58,8 @@ const TodoPage = () => {
       } else {
         throw new Error('할 일을 삭제할 수 없습니다.');
       }
-    } catch(err) {
-      console.error(err);
+    } catch(error) {
+      console.error(error);
     }
   }
 
@@ -72,6 +70,7 @@ const TodoPage = () => {
     <Container>
       <Row className="add-item-row">
         <Col xs={12} sm={10}>
+
           <input
             type="text"
             placeholder="할일을 입력하세요"
@@ -84,7 +83,6 @@ const TodoPage = () => {
           <button className="button-add" onClick={addTask}>추가</button>
         </Col>
       </Row>
-
       <TodoBoard todoList={todoList} updateTaskComplete={updateTaskComplete} deleteTask={deleteTask} />
     </Container>
   );

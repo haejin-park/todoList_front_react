@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
@@ -19,6 +19,7 @@ const RegisterPage = () => {
       }
       const response = await api.post('/user', {name, email, password});
       if(response.status === 200){
+        setError("");
         navigate('/login');
       } 
     } catch (error) {
