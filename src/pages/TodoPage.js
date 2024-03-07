@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import api from "../utils/api";
 import TodoBoard from "../components/TodoBoard";
-const TodoPage = () => {
+const TodoPage = ({setUser}) => {
   
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState('');
@@ -63,6 +63,10 @@ const TodoPage = () => {
       console.error(error);
     }
   }
+  const handleLogout = () => {
+    sessionStorage.setItem("token", "");
+    setUser(null);
+  } 
 
   useEffect(() => {
     getTasks();
@@ -70,8 +74,10 @@ const TodoPage = () => {
   return (
     <Container>
       <Row className="add-item-row">
+        <Col xs={12} sm={12}>  
+        <div className="logout" onClick={handleLogout}>logout</div>
+        </Col>
         <Col xs={12} sm={10}>
-
           <input
             type="text"
             placeholder="할일을 입력하세요"
