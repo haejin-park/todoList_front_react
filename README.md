@@ -1,3 +1,9 @@
+# 배포 URL(FRONTEND)
+[https://todolist-react-node.netlify.app/]
+
+# 배포 URL(BACKEND)
+[http://todolist-node.ap-northeast-2.elasticbeanstalk.com/api/tasks]
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
