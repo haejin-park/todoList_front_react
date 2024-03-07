@@ -1,9 +1,11 @@
-import axios from "axios";;
+import axios from "axios";
+
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_BACKEND_URL}/api`, //dev용 로컬주소 (netlify에 이 환경변수는 aws주소로 추가해놨고, 현재 사용하고있는 것은 아래거(http와 https 연결 해주기위해 프록시 설정해놓음)
   // baseURL: `${process.env.REACT_APP_BACKEND_PROXY}/api`, 
   headers: {
     "Content-Type": "application/json",
+    authorization: "Bearer " + sessionStorage.getItem("token"),
   },
 });
 /**

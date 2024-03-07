@@ -5,19 +5,29 @@ import TodoPage from './pages/TodoPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from "./route/PrivateRoute";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "./utils/api";
 
 function App() {
   const [user, setUser] = useState(null);
   const getUser = async () => {
     try {
-      const token = sessionStorage.getItem("token");
-      const response = await api.get("/user/me");
+      const storedToken = sessionStorage.getItem("token");
+      if(storedToken) {
+        const response = await api.get("/user/me");
+        if(response.status === 200) {
+          // console.log('response', response);
+          setUser(response.data.user);
+        }
+      }
     } catch(error) {
+      setUser(null)
       console.error(error);
     }
   }
+  useEffect(() => {
+    getUser();
+  }, [])
   return (
     <Routes>
         <Route 
@@ -29,7 +39,7 @@ function App() {
           }
         />
       <Route path="/register" element={<RegisterPage/>}/>
-      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>}/>
     </Routes>
   )
 }
