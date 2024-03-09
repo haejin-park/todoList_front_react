@@ -11,7 +11,6 @@ const TodoPage = ({setUser}) => {
       const response = await api.get('/tasks');
       if(response.status === 200) {
         setTodoList(response.data.data);
-        // console.log('todoList', todoList);
       } else {
         throw new Error('할 일을 조회할 수 없습니다.');
       }

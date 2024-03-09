@@ -16,7 +16,6 @@ function App() {
       if(storedToken) {
         const response = await api.get("/user/me");
         if(response.status === 200) {
-          // console.log('response', response);
           setUser(response.data.user);
         }
       }
