@@ -63,7 +63,7 @@ const TodoPage = ({setUser}) => {
     }
   }
   const handleLogout = () => {
-    sessionStorage.setItem("token", "");
+    sessionStorage.removeItem("token");
     setUser(null);
   } 
 
