@@ -15,13 +15,13 @@ function App() {
       const storedToken = sessionStorage.getItem("token");
       if(storedToken) {
         const response = await api.get("/user/me");
-        if(response.status === 200) {
-          setUser(response.data.user);
-        }
+        if(response.status !== 200) throw new Error(response.message);
+        setUser(response.data.user);
       }
     } catch(error) {
-      setUser(null)
       console.error(error);
+      sessionStorage.removeItem("token");
+      setUser(null)
     }
   }
   useEffect(() => {
