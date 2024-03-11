@@ -11,18 +11,15 @@ const LoginPage = ({user, setUser}) => {
   const handleLogin = async(e) => {
     e.preventDefault();
     try {
-      if(email && password) {
-        const response = await api.post('/user/login', {email, password});
-        if(response.status === 200) {
-          setError("");
-          sessionStorage.setItem("token",response.data.token);
-          api.defaults.headers["authorization"] = "Bearer " + response.data.token;
-          setUser(response.data.user);
-          navigate('/'); 
-        }  
-      } else {
-        throw new Error('이메일과 비밀번호를 모두 입력해주세요.');
-      }
+      if(!email || !password) throw new Error('이메일과 비밀번호를 모두 입력해주세요.');
+      const response = await api.post('/user/login', {email, password});
+      if(response.status === 200 && response.data) {
+        setError("");
+        sessionStorage.setItem("token",response.data.token); 
+        api.defaults.headers.authorization =`Bearer ${response.data.token}`;
+        setUser(response.data.user);
+        navigate('/'); 
+      }  
     } catch(error) {
       setError(error.message);
       console.error(error);

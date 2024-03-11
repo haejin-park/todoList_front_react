@@ -7,11 +7,13 @@ if (process.env.NODE_ENV === 'development') {
   url = `${process.env.REACT_APP_BACKEND_PROXY}/api`;
 }
 
+
+const token = sessionStorage.getItem("token");
 const api = axios.create({
   baseURL: url, 
   headers: {
     "Content-Type": "application/json",
-    authorization: "Bearer " + sessionStorage.getItem("token"),
+    "authorization": token? `Bearer ${token}` : undefined,
   },
 });
 
